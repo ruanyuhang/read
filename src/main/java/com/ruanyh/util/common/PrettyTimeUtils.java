@@ -1,4 +1,4 @@
-package com.ruanyh.util;
+package com.ruanyh.util.common;
 
 import org.ocpsoft.prettytime.PrettyTime;
 import org.ocpsoft.prettytime.units.JustNow;

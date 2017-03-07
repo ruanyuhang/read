@@ -1,5 +1,6 @@
 package com.ruanyh.util;
 
+import com.ruanyh.util.common.PrettyTimeUtils;
 import org.junit.Test;
 
 import java.util.Date;

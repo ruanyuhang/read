@@ -1,4 +1,4 @@
-package com.ruanyh.util;
+package com.ruanyh.util.common;
 
 import com.squareup.okhttp.OkHttpClient;
 
