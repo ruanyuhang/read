@@ -5,6 +5,8 @@ import org.ocpsoft.prettytime.units.JustNow;
 import org.ocpsoft.prettytime.units.Millisecond;
 import org.ocpsoft.prettytime.units.Second;
 
+import java.util.Date;
+
 public class PrettyTimeUtils {
     private static final PrettyTime PRETTY_TIME = new PrettyTime();
 
@@ -15,4 +17,8 @@ public class PrettyTimeUtils {
     }
 
     private PrettyTimeUtils() {}
+
+    public static String format(Date date) {
+        return PRETTY_TIME.format(date);
+    }
 }
