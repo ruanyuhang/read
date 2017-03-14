@@ -1,4 +1,4 @@
-package com.ruanyh.service;
+package com.ruanyh.service.demo;
 
 import org.springframework.stereotype.Service;
 

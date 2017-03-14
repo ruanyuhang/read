@@ -1,7 +1,7 @@
-package com.ruanyh.controller;
+package com.ruanyh.controller.demo;
 
-import com.ruanyh.service.DemoService;
-import com.ruanyh.vo.DemoVo;
+import com.ruanyh.service.demo.DemoService;
+import com.ruanyh.vo.DemoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +23,8 @@ public class DemoController {
 
     @RequestMapping(value="/getDetail")
     @ResponseBody
-    public DemoVo getDetail(HttpServletRequest request) {
-        DemoVo vo = new DemoVo();
+    public DemoVO getDetail(HttpServletRequest request) {
+        DemoVO vo = new DemoVO();
         vo.setId(1);
         vo.setName("测试");
         vo.setCreateTime(System.currentTimeMillis());

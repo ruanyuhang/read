@@ -1,6 +1,6 @@
 package com.ruanyh.vo;
 
-public class DemoVo {
+public class DemoVO {
     public Integer id;
     public String name;
     public Long createTime;
