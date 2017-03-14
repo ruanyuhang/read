@@ -1,12 +1,13 @@
 package com.ruanyh.util.common;
 
-/**
- * 与业务相关的方法
- */
-public class BusinessUtils {
+
+public class VideoUtils {
     /**
      * 私有的构造方法,不允许实例化
      */
-    private BusinessUtils() {}
+    private VideoUtils() {}
+
+    // TODO 截取封面
+    // TODO 转码
 
 }
