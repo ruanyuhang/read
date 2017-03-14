@@ -7,5 +7,5 @@ public class JsonUtils {
      */
     private JsonUtils() {}
 
-    
+
 }
