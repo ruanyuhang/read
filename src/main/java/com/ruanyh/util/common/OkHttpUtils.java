@@ -11,6 +11,9 @@ public class OkHttpUtils {
         HTTP_CLIENT.setConnectTimeout(30, TimeUnit.SECONDS);
     }
 
+    /**
+     * 私有的构造方法,不允许实例化
+     */
     private OkHttpUtils() {}
 
 

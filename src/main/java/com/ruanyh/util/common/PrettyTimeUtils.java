@@ -16,6 +16,9 @@ public class PrettyTimeUtils {
         PRETTY_TIME.removeUnit(Millisecond.class);
     }
 
+    /**
+     * 私有的构造方法,不允许实例化
+     */
     private PrettyTimeUtils() {}
 
     public static String format(Date date) {
