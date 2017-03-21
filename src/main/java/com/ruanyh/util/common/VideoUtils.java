@@ -8,6 +8,8 @@ public class VideoUtils {
     private VideoUtils() {}
 
     // TODO 截取封面
+    // TODO 加水印
     // TODO 转码
+    // 获取视频时长
 
 }
