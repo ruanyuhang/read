@@ -38,16 +38,9 @@ public class HttpClientUtils {
      */
     private HttpClientUtils() {}
 
-    /**
-     * 通过连接池获取HttpClient
-     * @return
-     */
-    private static CloseableHttpClient getHttpClient() {
-        return HttpClients.custom().setConnectionManager(connectionManager).build();
-    }
 
     /**
-     * Get方法
+     * Get方法(无参数)
      * @param url
      * @return
      */
@@ -56,6 +49,13 @@ public class HttpClientUtils {
         return response(httpGet);
     }
 
+    /**
+     * Get方法(有参数)
+     * @param url
+     * @param params 请求参数
+     * @return
+     * @throws URISyntaxException
+     */
     public static String get(String url, Map<String, Object> params) throws URISyntaxException {
         URIBuilder uriBuilder = new URIBuilder();
         uriBuilder.setPath(url);
@@ -67,6 +67,14 @@ public class HttpClientUtils {
         return response(httpGet);
     }
 
+    /**
+     * Get方法
+     * @param url
+     * @param headers Http请求头
+     * @param params 请求参数
+     * @return
+     * @throws URISyntaxException
+     */
     public static String get(String url, Map<String, Object> headers, Map<String, Object> params)
             throws URISyntaxException {
         URIBuilder uriBuilder = new URIBuilder();
@@ -82,12 +90,23 @@ public class HttpClientUtils {
         return response(httpGet);
     }
 
-
+    /**
+     * Post方法
+     * @param url
+     * @return
+     */
     public static String post(String url) {
         HttpPost httpPost = new HttpPost(url);
         return response(httpPost);
     }
 
+    /**
+     * Post方法
+     * @param url
+     * @param params 请求参数
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     public static String post(String url, Map<String, Object> params) throws UnsupportedEncodingException {
         HttpPost httpPost = new HttpPost(url);
         ArrayList<NameValuePair> pairs = covertParams2NVPS(params);
@@ -95,6 +114,14 @@ public class HttpClientUtils {
         return response(httpPost);
     }
 
+    /**
+     * Post方法
+     * @param url
+     * @param headers Http请求头
+     * @param params 请求参数
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     public static String post(String url, Map<String, Object> headers, Map<String, Object> params)
             throws UnsupportedEncodingException {
         HttpPost httpPost = new HttpPost(url);
@@ -109,6 +136,11 @@ public class HttpClientUtils {
         return response(httpPost);
     }
 
+    /**
+     * 参数转换
+     * @param params
+     * @return
+     */
     private static ArrayList<NameValuePair> covertParams2NVPS(Map<String, Object> params) {
         ArrayList<NameValuePair> pairs = new ArrayList<>();
         for (Map.Entry<String, Object> param : params.entrySet()) {
@@ -117,9 +149,12 @@ public class HttpClientUtils {
         return pairs;
     }
 
-
+    /**
+     * 响应
+     * @param request
+     * @return
+     */
     private static String response(HttpRequestBase request) {
-        // CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpClient httpClient = getHttpClient();
         try {
             CloseableHttpResponse response = httpClient.execute(request);
@@ -141,4 +176,13 @@ public class HttpClientUtils {
         }
         return EMPTY_STR;
     }
+
+    /**
+     * 通过连接池获取HttpClient
+     * @return
+     */
+    private static CloseableHttpClient getHttpClient() {
+        return HttpClients.custom().setConnectionManager(connectionManager).build();
+    }
+
 }
