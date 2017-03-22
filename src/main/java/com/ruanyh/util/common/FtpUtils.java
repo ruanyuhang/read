@@ -3,6 +3,7 @@ package com.ruanyh.util.common;
 
 import org.apache.commons.net.ftp.FTPClient;
 
+
 public class FtpUtils {
     private static final String FTP_HOST = "";
     private static final String FTP_USERNAME = "";
