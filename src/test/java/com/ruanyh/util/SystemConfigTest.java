@@ -1,6 +1,6 @@
 package com.ruanyh.util;
 
-import com.ruanyh.util.common.PropertiesUtils;
+import com.ruanyh.util.common.SystemConfig;
 import org.junit.Test;
 
 /**
@@ -9,8 +9,10 @@ import org.junit.Test;
 public class SystemConfigTest {
     @Test
     public void testGet() {
-        String val = PropertiesUtils.get("system.ftp.host");
-        System.out.println("@system.ftp.host=" + val);
+        System.out.println("@value=" + SystemConfig.get("system.ftp.host"));
+        System.out.println("@value=" + SystemConfig.get("system.ftp.username"));
+        System.out.println("@value=" + SystemConfig.get("system.ftp.password"));
+        System.out.println("@value=" + SystemConfig.get("system.ftp.password0"));
     }
 
 }

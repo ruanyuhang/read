@@ -14,8 +14,8 @@ import java.io.InputStream;
 
 public class FtpUtils {
     private static final String FTP_HOST = SystemConfig.get("system.ftp.host");
-    private static final String FTP_USERNAME = SystemConfig.get("system.ftp.host");
-    private static final String FTP_PASSWORD = SystemConfig.get("system.ftp.host");
+    private static final String FTP_USERNAME = SystemConfig.get("system.ftp.username");
+    private static final String FTP_PASSWORD = SystemConfig.get("system.ftp.password");
     private static final int FTP_PORT = FTPClient.DEFAULT_PORT;
 
     /**

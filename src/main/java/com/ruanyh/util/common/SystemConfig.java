@@ -1,27 +1,25 @@
 package com.ruanyh.util.common;
 
-import java.io.IOException;
-import java.util.Properties;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.DefaultConfigurationBuilder;
+
+import java.io.File;
 
 /**
- *
+ * 系统配置
  */
 public class SystemConfig {
-    private static final String PROPERTIES_FILENAME = "system-config.properties";
-    private static Properties properties = new Properties();
-
+    private static final String DEFAULT_CONFIG_FILENAME = "config.xml";
+    private static Configuration CONFIG = null;
     static {
+        DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
+        builder.setFile(new File(DEFAULT_CONFIG_FILENAME));
         try {
-            properties.load(SystemConfig.class.getClassLoader().getResourceAsStream(PROPERTIES_FILENAME));
-        } catch (IOException e) {
+            CONFIG = builder.getConfiguration(true);
+        } catch (ConfigurationException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * 私有的构造方法,不允许实例化
-     */
-    private SystemConfig() {
     }
 
     /**
@@ -30,7 +28,7 @@ public class SystemConfig {
      * @return
      */
     public static String get(String key) {
-        return properties.getProperty(key);
+        return CONFIG.getString(key);
     }
 
 }
