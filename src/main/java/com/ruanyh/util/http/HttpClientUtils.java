@@ -16,6 +16,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,13 +57,9 @@ public class HttpClientUtils {
      * @throws URISyntaxException
      */
     public static String get(String url, Map<String, Object> params) throws URISyntaxException, IOException {
-        URIBuilder uriBuilder = new URIBuilder();
-        uriBuilder.setPath(url);
-
         List<NameValuePair> pairs = covert2NameValuePair(params);
-        uriBuilder.setParameters(pairs);
-
-        HttpGet httpGet = new HttpGet(uriBuilder.build());
+        URI uri = new URIBuilder().setPath(url).setParameters(pairs).build();
+        HttpGet httpGet = new HttpGet(uri);
         return response(httpGet);
     }
 
@@ -76,13 +73,9 @@ public class HttpClientUtils {
      */
     public static String get(String url, Map<String, Object> headers, Map<String, Object> params)
             throws URISyntaxException, IOException {
-        URIBuilder uriBuilder = new URIBuilder();
-        uriBuilder.setPath(url);
-
         List<NameValuePair> pairs = covert2NameValuePair(params);
-        uriBuilder.setParameters(pairs);
-
-        HttpGet httpGet = new HttpGet(uriBuilder.build());
+        URI uri = new URIBuilder().setPath(url).setParameters(pairs).build();
+        HttpGet httpGet = new HttpGet(uri);
         for (Map.Entry<String, Object> param : headers.entrySet()) {
             httpGet.addHeader(param.getKey(), String.valueOf(param.getValue()));
         }
