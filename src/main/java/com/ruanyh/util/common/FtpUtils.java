@@ -1,6 +1,6 @@
 package com.ruanyh.util.common;
 
-
+import com.ruanyh.util.common.config.SystemConfig;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.net.ftp.FTP;
@@ -17,14 +17,20 @@ public class FtpUtils {
     private static final String FTP_USERNAME = SystemConfig.get("system.ftp.username");
     private static final String FTP_PASSWORD = SystemConfig.get("system.ftp.password");
     private static final int FTP_PORT = FTPClient.DEFAULT_PORT;
+    private static final String UPLOAD_PATH = SystemConfig.get("system.ftp.home");
 
     /**
      * 私有的构造方法,不允许实例化
      */
     private FtpUtils() {}
 
-
-    public static boolean upload(String filePath) throws IOException {
+    /**
+     * 上传
+     * @param localFilePath
+     * @return
+     * @throws IOException
+     */
+    public static boolean upload(String localFilePath) throws IOException {
         boolean result = false;
         FTPClient client = new FTPClient();
         InputStream is = null;
@@ -42,11 +48,8 @@ public class FtpUtils {
                 return result;
             }
 
-            // TODO 获取配置中的目录
-
-            client.changeWorkingDirectory("/tmp");                  // 定位到目录
-
-            File file = new File(filePath);                         // 本地文件
+            client.changeWorkingDirectory(UPLOAD_PATH);             // 定位到文件上传路径
+            File file = new File(localFilePath);                    // 本地文件
             is = FileUtils.openInputStream(file);                   // 转换为流
             result = client.storeFile(file.getName(), is);          // 上传
         } finally {

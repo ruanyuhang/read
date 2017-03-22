@@ -1,6 +1,6 @@
 package com.ruanyh.util;
 
-import com.ruanyh.util.common.SystemConfig;
+import com.ruanyh.util.common.config.SystemConfig;
 import org.junit.Test;
 
 /**

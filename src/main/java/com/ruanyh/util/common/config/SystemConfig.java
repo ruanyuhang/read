@@ -1,5 +1,4 @@
-package com.ruanyh.util.common;
-
+package com.ruanyh.util.common.config;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.DefaultConfigurationBuilder;
@@ -12,6 +11,7 @@ import java.io.File;
 public class SystemConfig {
     private static final String DEFAULT_CONFIG_FILENAME = "config.xml";
     private static Configuration CONFIG = null;
+
     static {
         DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
         builder.setFile(new File(DEFAULT_CONFIG_FILENAME));
@@ -21,6 +21,11 @@ public class SystemConfig {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 私有的构造方法,不允许实例化
+     */
+    private SystemConfig() {}
 
     /**
      * 获取
