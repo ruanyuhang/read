@@ -15,6 +15,7 @@ public class FtpUtils {
      */
     private FtpUtils() {}
 
+
     public static void upload(String filePath) {
         FTPClient client = new FTPClient();
 
