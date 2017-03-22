@@ -60,12 +60,14 @@ public interface Cache {
      */
     boolean set(String key, Object value, Integer expire);
 
+
     /**
      * 获取
      * @param key
      * @return
      */
     Object get(String key);
+
 
     /**
      * 移除

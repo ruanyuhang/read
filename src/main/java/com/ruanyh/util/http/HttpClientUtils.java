@@ -57,7 +57,7 @@ public class HttpClientUtils {
      * @throws URISyntaxException
      */
     public static String get(String url, Map<String, Object> params) throws URISyntaxException, IOException {
-        List<NameValuePair> pairs = covert2NameValuePair(params);
+        List<NameValuePair> pairs = getNVPair(params);
         URI uri = new URIBuilder().setPath(url).setParameters(pairs).build();
         HttpGet httpGet = new HttpGet(uri);
         return response(httpGet);
@@ -73,7 +73,7 @@ public class HttpClientUtils {
      */
     public static String get(String url, Map<String, Object> headers, Map<String, Object> params)
             throws URISyntaxException, IOException {
-        List<NameValuePair> pairs = covert2NameValuePair(params);
+        List<NameValuePair> pairs = getNVPair(params);
         URI uri = new URIBuilder().setPath(url).setParameters(pairs).build();
         HttpGet httpGet = new HttpGet(uri);
         for (Map.Entry<String, Object> param : headers.entrySet()) {
@@ -101,7 +101,7 @@ public class HttpClientUtils {
      */
     public static String post(String url, Map<String, Object> params) throws IOException {
         HttpPost httpPost = new HttpPost(url);
-        List<NameValuePair> pairs = covert2NameValuePair(params);
+        List<NameValuePair> pairs = getNVPair(params);
         httpPost.setEntity(new UrlEncodedFormEntity(pairs, UTF8));
         return response(httpPost);
     }
@@ -122,7 +122,7 @@ public class HttpClientUtils {
             httpPost.addHeader(param.getKey(), String.valueOf(param.getValue()));
         }
 
-        List<NameValuePair> pairs = covert2NameValuePair(params);
+        List<NameValuePair> pairs = getNVPair(params);
         httpPost.setEntity(new UrlEncodedFormEntity(pairs, UTF8));
 
         return response(httpPost);
@@ -133,7 +133,7 @@ public class HttpClientUtils {
      * @param params
      * @return
      */
-    private static List<NameValuePair> covert2NameValuePair(Map<String, Object> params) {
+    private static List<NameValuePair> getNVPair(Map<String, Object> params) {
         List<NameValuePair> pairs = new ArrayList<>();
         for (Map.Entry<String, Object> param : params.entrySet()) {
             pairs.add(new BasicNameValuePair(param.getKey(), String.valueOf(param.getValue())));
