@@ -59,7 +59,7 @@ public class HttpClientUtils {
         URIBuilder uriBuilder = new URIBuilder();
         uriBuilder.setPath(url);
 
-        List<NameValuePair> pairs = covertParams2NVPS(params);
+        List<NameValuePair> pairs = covert2NameValuePair(params);
         uriBuilder.setParameters(pairs);
 
         HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -79,7 +79,7 @@ public class HttpClientUtils {
         URIBuilder uriBuilder = new URIBuilder();
         uriBuilder.setPath(url);
 
-        List<NameValuePair> pairs = covertParams2NVPS(params);
+        List<NameValuePair> pairs = covert2NameValuePair(params);
         uriBuilder.setParameters(pairs);
 
         HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -108,7 +108,7 @@ public class HttpClientUtils {
      */
     public static String post(String url, Map<String, Object> params) throws IOException {
         HttpPost httpPost = new HttpPost(url);
-        List<NameValuePair> pairs = covertParams2NVPS(params);
+        List<NameValuePair> pairs = covert2NameValuePair(params);
         httpPost.setEntity(new UrlEncodedFormEntity(pairs, UTF8));
         return response(httpPost);
     }
@@ -129,18 +129,18 @@ public class HttpClientUtils {
             httpPost.addHeader(param.getKey(), String.valueOf(param.getValue()));
         }
 
-        List<NameValuePair> pairs = covertParams2NVPS(params);
+        List<NameValuePair> pairs = covert2NameValuePair(params);
         httpPost.setEntity(new UrlEncodedFormEntity(pairs, UTF8));
 
         return response(httpPost);
     }
 
     /**
-     * 参数转换
+     * Map参数转换为NameValuePair列表
      * @param params
      * @return
      */
-    private static List<NameValuePair> covertParams2NVPS(Map<String, Object> params) {
+    private static List<NameValuePair> covert2NameValuePair(Map<String, Object> params) {
         List<NameValuePair> pairs = new ArrayList<>();
         for (Map.Entry<String, Object> param : params.entrySet()) {
             pairs.add(new BasicNameValuePair(param.getKey(), String.valueOf(param.getValue())));
