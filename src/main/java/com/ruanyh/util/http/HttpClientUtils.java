@@ -112,7 +112,7 @@ public class HttpClientUtils {
      * @param headers Http请求头
      * @param params 请求参数
      * @return
-     * @throws UnsupportedEncodingException
+     * @throws IOException
      */
     public static String post(String url, Map<String, Object> headers, Map<String, Object> params)
             throws IOException {
