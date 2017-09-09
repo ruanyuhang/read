@@ -199,6 +199,21 @@ public class FfmpegCommand {
         }
 
         /**
+         * 设置图片位置
+         * @param overlayX
+         * @param overlayY
+         * @return
+         */
+        public Builder setOverlayPosition(Integer overlayX, Integer overlayY) {
+            if (overlayX == null) {
+                System.out.println("");
+            }
+            target.overlayX = overlayX;
+            target.overlayY = overlayY;
+            return this;
+        }
+
+        /**
          * 设置视频时长
          * The following examples are all valid time duration:
          * ‘55’
