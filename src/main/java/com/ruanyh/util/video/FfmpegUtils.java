@@ -1,4 +1,4 @@
-package com.ruanyh.util.ffmpeg;
+package com.ruanyh.util.video;
 
 public class FfmpegUtils {
     /**
