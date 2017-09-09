@@ -11,10 +11,10 @@ import java.io.File;
 public class FfmpegCommand {
     private final String ffmpegPath = "ffmpeg";           // ffmpeg的安装位置
 
-    private String inputPath;               // 输入路径
-    private String outputPath;              // 输出目录
+    private String inputFile;               // 输入文件
+    private String outputFile;              // 输出文件
 
-    private String watermarkPath;           // 水印路径
+    private String watermark;           // 水印路径
     private boolean addWatermark;           // 需要加水印
     private Integer overlayX;               // 图片位置X轴
     private Integer overlayY;               // 图片位置Y轴
@@ -29,30 +29,11 @@ public class FfmpegCommand {
 
     /**
      * 创建构造者
-     * @param inputPath 输入路径
-     * @return
-     */
-    public static FfmpegCommand.Builder of(String inputPath) {
-        return new FfmpegCommand.Builder(inputPath);
-    }
-
-    /**
-     * 创建构造者
-     * @param inputPath 输入路径
-     * @param outputPath 输出路径
-     * @return
-     */
-    public static FfmpegCommand.Builder of(String inputPath, String outputPath) {
-        return new FfmpegCommand.Builder(inputPath, outputPath);
-    }
-
-    /**
-     * 创建构造者
      * @param inputFile 输入文件
      * @return
      */
-    public static FfmpegCommand.Builder of(File inputFile) {
-        return of(inputFile.getAbsolutePath());
+    public static FfmpegCommand.Builder of(String inputFile) {
+        return new FfmpegCommand.Builder(inputFile);
     }
 
     /**
@@ -61,18 +42,37 @@ public class FfmpegCommand {
      * @param outputFile 输出文件
      * @return
      */
-    public static FfmpegCommand.Builder of(File inputFile, File outputFile) {
-        return of(inputFile.getAbsolutePath(), outputFile.getAbsolutePath());
+    public static FfmpegCommand.Builder of(String inputFile, String outputFile) {
+        return new FfmpegCommand.Builder(inputFile, outputFile);
+    }
+
+    /**
+     * 创建构造者
+     * @param originalFile 输入文件
+     * @return
+     */
+    public static FfmpegCommand.Builder of(File originalFile) {
+        return of(originalFile.getAbsolutePath());
+    }
+
+    /**
+     * 创建构造者
+     * @param originalFile 输入文件
+     * @param targetFile 输出文件
+     * @return
+     */
+    public static FfmpegCommand.Builder of(File originalFile, File targetFile) {
+        return of(originalFile.getAbsolutePath(), targetFile.getAbsolutePath());
     }
 
 
 
     /**
-     * 生成输出路径
+     * 生成输出文件的绝对路径
      * @return
      */
-    public String generateOutputPath() {
-        return outputPath;
+    public String generateOutputAbsolutePath() {
+        return outputFile;
     }
 
 
@@ -82,9 +82,9 @@ public class FfmpegCommand {
      */
     public String generateTranscodingCommand() {
         StringBuffer buffer = new StringBuffer(ffmpegPath);
-        buffer.append(" -i ").append(inputPath);
+        buffer.append(" -i ").append(inputFile);
         if (addWatermark) {// 需要加水印
-            buffer.append(" -vf \"movie=" + watermarkPath + " [watermark]; [in][watermark] ")
+            buffer.append(" -vf \"movie=" + watermark + " [watermark]; [in][watermark] ")
                     .append("overlay=")
                     .append(overlayX != null ? overlayX : defaultOverlayX)
                     .append(":")
@@ -92,7 +92,7 @@ public class FfmpegCommand {
                     .append(" [out]\" ");
         }
         buffer.append(" -c:v libx264 -strict -2 ");
-        buffer.append(outputPath);
+        buffer.append(outputFile);
         return buffer.toString();
     }
 
@@ -103,9 +103,9 @@ public class FfmpegCommand {
     public String generateImage2VideoCommand() {
         StringBuffer buffer = new StringBuffer(ffmpegPath);
         buffer.append(" -r 25 -loop 1 -i ")
-            .append(inputPath)  // 原文件的路径
+            .append(inputFile)  // 原文件的路径
             .append(" -r 25 -t 3 ")
-            .append(outputPath); // 文件输出路径
+            .append(outputFile); // 文件输出路径
         return buffer.toString();
     }
 
@@ -114,9 +114,9 @@ public class FfmpegCommand {
     public String toString() {
         return "FfmpegCommand{" +
                 "ffmpegPath='" + ffmpegPath + '\'' +
-                ", inputPath='" + inputPath + '\'' +
-                ", outputPath='" + outputPath + '\'' +
-                ", watermarkPath='" + watermarkPath + '\'' +
+                ", inputPath='" + inputFile + '\'' +
+                ", outputPath='" + outputFile + '\'' +
+                ", watermark='" + watermark + '\'' +
                 ", addWatermark=" + addWatermark +
                 ", overlayX=" + overlayX +
                 ", overlayY=" + overlayY +
@@ -139,35 +139,35 @@ public class FfmpegCommand {
 
         /**
          * 构造
-         * @param inputPath
+         * @param inputFile
          */
-        public Builder(String inputPath) {
+        public Builder(String inputFile) {
             target = new FfmpegCommand();
-            target.inputPath = inputPath;
+            target.inputFile = inputFile;
         }
 
         /**
          * 构造
-         * @param inputPath
-         * @param outputPath
+         * @param inputFile
+         * @param outputFile
          */
-        public Builder(String inputPath, String outputPath) {
+        public Builder(String inputFile, String outputFile) {
             target = new FfmpegCommand();
-            target.inputPath = inputPath;
-            target.outputPath = outputPath;
+            target.inputFile = inputFile;
+            target.outputFile = outputFile;
         }
 
 
         /**
          * 添加水印
-         * @param watermarkPath 水印位置
+         * @param watermark 水印位置
          * @return
          */
-        public Builder addWatermark(String watermarkPath) {
-            if (StringUtils.isBlank(watermarkPath)) {
-                throw new RuntimeException("[设置水印] 参数watermarkPath不能为空");
+        public Builder addWatermark(String watermark) {
+            if (StringUtils.isBlank(watermark)) {
+                throw new RuntimeException("[设置水印] 参数watermark不能为空");
             }
-            target.watermarkPath = watermarkPath;
+            target.watermark = watermark;
             target.addWatermark = true;
             return this;
         }
@@ -263,15 +263,15 @@ public class FfmpegCommand {
 
 
         /**
-         * 输出到outputPath
-         * @param outputPath 输出路径
+         * 输出到outputFile
+         * @param outputFile 输出路径
          * @return
          */
-        public Builder outputTo(String outputPath) {
-            if (outputPath == null) {
-                throw new RuntimeException("[设置输出路径] 参数outputPath不能为空");
+        public Builder outputFile(String outputFile) {
+            if (outputFile == null) {
+                throw new RuntimeException("[设置输出路径] 参数outputFile不能为空");
             }
-            target.outputPath = outputPath;
+            target.outputFile = outputFile;
             return this;
         }
 
@@ -293,7 +293,7 @@ public class FfmpegCommand {
         String inputPath = "/User/ruanyh/Documents/input.mp4";
         String watermarkPath = "/User/ruanyh/Documents/watermark.png";
         String outoutPath = "/User/ruanyh/Document/out.mp4";
-        FfmpegCommand command = FfmpegCommand.of(inputPath).addWatermark(watermarkPath).setOverlayX(0).setOverlayY(0).outputTo(outoutPath).build();
+        FfmpegCommand command = FfmpegCommand.of(inputPath).addWatermark(watermarkPath).setOverlayX(0).setOverlayY(0).outputFile(outoutPath).build();
         System.out.println(command);
         System.out.println(command.generateTranscodingCommand());
 

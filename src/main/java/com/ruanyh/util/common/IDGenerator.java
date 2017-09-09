@@ -25,4 +25,10 @@ public class IDGenerator {
         return null;
     }
 
+    public static String randomCode(int n) {
+        return null;
+    }
+
+
+
 }
