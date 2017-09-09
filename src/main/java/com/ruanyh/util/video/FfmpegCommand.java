@@ -296,6 +296,9 @@ public class FfmpegCommand {
         FfmpegCommand command = FfmpegCommand.of(inputPath).addWatermark(watermarkPath).setOverlayX(0).setOverlayY(0).outputTo(outoutPath).build();
         System.out.println(command);
         System.out.println(command.generateTranscodingCommand());
+
+        String os = System.getProperty("os.name");
+        System.out.println(os);
     }
 
 
