@@ -146,11 +146,17 @@ public class FfmpegCommand {
             target.inputPath = inputPath;
         }
 
+        /**
+         * 构造
+         * @param inputPath
+         * @param outputPath
+         */
         public Builder(String inputPath, String outputPath) {
             target = new FfmpegCommand();
             target.inputPath = inputPath;
             target.outputPath = outputPath;
         }
+
 
         /**
          * 添加水印
