@@ -23,7 +23,7 @@ public class FfmpegCommand {
     private String size;                    // 视频大小
     private String duration;                // 视频时长
 
-
+    private final Integer defaultFps = 25;
     private final Integer defaultOverlayX = 10;   // 默认图片位置X轴
     private final Integer defaultOverlayY = 10;   // 默认图片位置Y轴
 
@@ -110,9 +110,6 @@ public class FfmpegCommand {
     }
 
 
-
-
-
     @Override
     public String toString() {
         return "FfmpegCommand{" +
@@ -123,10 +120,16 @@ public class FfmpegCommand {
                 ", addWatermark=" + addWatermark +
                 ", overlayX=" + overlayX +
                 ", overlayY=" + overlayY +
+                ", fps=" + fps +
+                ", size='" + size + '\'' +
+                ", duration='" + duration + '\'' +
+                ", defaultFps=" + defaultFps +
                 ", defaultOverlayX=" + defaultOverlayX +
                 ", defaultOverlayY=" + defaultOverlayY +
                 '}';
     }
+
+
 
     /**
      * ffmpeg命令构造
@@ -170,7 +173,7 @@ public class FfmpegCommand {
          */
         public Builder setOverlayX(Integer overlayX) {
             if (overlayX == null) {
-                throw new RuntimeException("[设置图片路径x轴] 参数overlayX不能为空");
+                System.out.println("");
             }
             target.overlayX = overlayX;
             return this;
@@ -183,7 +186,7 @@ public class FfmpegCommand {
          */
         public Builder setOverlayY(Integer overlayY) {
             if (overlayY == null) {
-                throw new RuntimeException("[设置图片路径y轴] 参数overlayY不能为空");
+                System.out.println("");
             }
             target.overlayY = overlayY;
             return this;
@@ -228,7 +231,7 @@ public class FfmpegCommand {
          * @param fps
          * @return
          */
-        public Builder setVideoFrameRate(Integer fps) {
+        public Builder setVideoRate(Integer fps) {
             if (fps == null) {
                 throw new RuntimeException("[设置视频帧率] 参数fps不能为空");
             }
