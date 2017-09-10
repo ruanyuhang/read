@@ -19,7 +19,20 @@ public class IDGenerator {
      * @return
      */
     public static String uuid() {
-        return UUID.randomUUID().toString().replace("-", "");
+        return uuid(null);
+    }
+
+    /**
+     * UUID
+     * @param separator 分隔符
+     * @return
+     */
+    public static String uuid(String separator) {
+        if (separator == null) {
+            separator = "";
+        }
+        String uuid = UUID.randomUUID().toString();
+        return "-".equals(separator) ? uuid : uuid.replace("-", separator);
     }
 
     /**
@@ -49,6 +62,7 @@ public class IDGenerator {
         System.out.println(uuid());
         System.out.println(randomNum(6));
         System.out.println(System.getProperty("user.home"));
+        System.out.println(uuid("@"));
     }
 
 }

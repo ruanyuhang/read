@@ -47,9 +47,6 @@ public class FtpUtils {
                 return success;
             }
 
-            File file = new File(original);
-            input = new FileInputStream(original);
-
             if (client.changeWorkingDirectory("/")) {
                 String ftpHome = target;
                 if (StringUtils.isNotBlank(ftpHome)) {
@@ -60,6 +57,9 @@ public class FtpUtils {
                     }
                 }
                 client.setControlEncoding("UTF-8");
+
+                File file = new File(original);
+                input = new FileInputStream(original);
                 success = client.storeFile(file.getName(), input);
             }
         } catch (Exception e) {
