@@ -174,7 +174,7 @@ public class IDCardUtils {
         private String name;
         private Integer value;
 
-        private Sex(String name, Integer value) {
+        Sex(String name, Integer value) {
             this.name = name;
             this.value = value;
         }

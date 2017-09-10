@@ -48,6 +48,7 @@ public class IDGenerator {
     public static void main(String[] args) {
         System.out.println(uuid());
         System.out.println(randomNum(6));
+        System.out.println(System.getProperty("user.home"));
     }
 
 }
