@@ -292,8 +292,8 @@ public class FfmpegCommand {
     public static void main(String[] args) {
         String inputPath = "/User/ruanyh/Documents/input.mp4";
         String watermarkPath = "/User/ruanyh/Documents/watermark.png";
-        String outoutPath = "/User/ruanyh/Document/out.mp4";
-        FfmpegCommand command = FfmpegCommand.of(inputPath).addWatermark(watermarkPath).setOverlayX(0).setOverlayY(0).outputFile(outoutPath).build();
+        String outputPath = "/User/ruanyh/Document/out.mp4";
+        FfmpegCommand command = FfmpegCommand.of(inputPath).addWatermark(watermarkPath).setOverlayX(0).setOverlayY(0).outputFile(outputPath).build();
         System.out.println(command);
         System.out.println(command.generateTranscodingCommand());
 
